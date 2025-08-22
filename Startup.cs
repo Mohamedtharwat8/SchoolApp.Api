@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SchoolApp.Api.Data;
+using SchoolApp.Api.Models;
 
 namespace SchoolApp.Api
 {
@@ -31,10 +33,20 @@ namespace SchoolApp.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Configure DbContext with SQL Server
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(ConnectionString);
-            }); 
+            });
+
+            //Add Identity DbContext
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
