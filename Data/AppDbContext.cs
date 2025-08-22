@@ -10,8 +10,8 @@ namespace SchoolApp.Api.Data
         {
         }
 
-        protected AppDbContext()
-        {
-        }
+       public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }
+
+

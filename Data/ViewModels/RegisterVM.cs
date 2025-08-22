@@ -13,6 +13,7 @@ namespace SchoolApp.Api.Data.ViewModels
         public string UserName { get; set; }
         [Required]
         [MinLength(6)] 
-        public string Password { get; set; } 
+        public string Password { get; set; }
+        public string Role { get; set; }
     }
 }
